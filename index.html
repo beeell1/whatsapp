@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>WhatsApp</title>
+    <style>
+        body {
+            background: #128C7E;
+        }
+
+        #PINform input:focus,
+        #PINform select:focus,
+        #PINform textarea:focus,
+        #PINform button:focus {
+            outline: none;
+        }
+        #PINform {
+            background: #ededed;
+            position: absolute;
+            width: 300px; height: 500px;
+            left: 50%;
+            margin-left: -180px;
+            top: 50%;
+            margin-top: -300px;
+            padding: 30px;
+            -webkit-box-shadow: 0px 5px 5px -0px rgba(0,0,0,0.3);
+                -moz-box-shadow: 0px 5px 5px -0px rgba(0,0,0,0.3);
+                    box-shadow: 0px 5px 5px -0px rgba(0,0,0,0.3);
+        }
+        #PINbox {
+            background: #ededed;
+            margin: 3.5%;
+            width: 92%;
+            font-size: 2em;
+            line-height: 2em;
+            text-align: center;
+            border: 1px solid #d5d5d5;
+        }
+        .PINbutton {
+            background: #ededed;
+            color: #7e7e7e;
+            border: none;
+            /*background: linear-gradient(to bottom, #fafafa, #eaeaea);
+            -webkit-box-shadow: 0px 2px 2px -0px rgba(0,0,0,0.3);
+                -moz-box-shadow: 0px 2px 2px -0px rgba(0,0,0,0.3);
+                    box-shadow: 0px 2px 2px -0px rgba(0,0,0,0.3);*/
+            border-radius: 50%;
+            font-size: 1.5em;
+            text-align: center;
+            width: 60px;
+            height: 60px;
+            margin: 7px 20px;
+            padding: 0;
+        }
+        .clear, .enter {
+            font-size: 1em;
+        }
+        .PINbutton:hover {
+            box-shadow: #128C7E 0 0 1px 1px;
+        }
+        .PINbutton:active {
+            background: #128C7E;
+            color: #fff;
+        }
+        .clear:hover {
+            box-shadow: #128C7E 0 0 1px 1px;
+        }
+        .clear:active {
+            background: #128C7E;
+            color: #fff;
+        }
+        .enter:hover {
+            box-shadow: #128C7E 0 0 1px 1px;
+        }
+        .enter:active {
+            background: #128C7E;
+            color: #fff;
+        }
+        .shadow{
+            -webkit-box-shadow: 0px 5px 5px -0px rgba(0,0,0,0.3);
+                -moz-box-shadow: 0px 5px 5px -0px rgba(0,0,0,0.3);
+                    box-shadow: 0px 5px 5px -0px rgba(0,0,0,0.3);
+        }
+
+    </style>
+</head>
+<body>
+    <div id="PINcode"></div>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js" integrity="sha256-9/aliU8dGd2tb6OSsuzixeV4y/faTqgFtohetphbbj0=" crossorigin="anonymous"></script>
+    <script>
+        $(function() {
+            $( "#PINbox" ).focus();
+        });
+        
+        $( "#PINcode" ).html(
+            "<form name='PINform' id='PINform' autocomplete='off'>" +
+                "<img src='whatsapp.png' width='100%'>"+
+                "<input id='PINbox' type='text' value='' name='PINbox' />" +
+                "<br/>" +
+                "<input type='button' class='PINbutton' name='1' value='1' id='1' onClick=addNumber(this); />" +
+                "<input type='button' class='PINbutton' name='2' value='2' id='2' onClick=addNumber(this); />" +
+                "<input type='button' class='PINbutton' name='3' value='3' id='3' onClick=addNumber(this); />" +
+                "<br>" +
+                "<input type='button' class='PINbutton' name='4' value='4' id='4' onClick=addNumber(this); />" +
+                "<input type='button' class='PINbutton' name='5' value='5' id='5' onClick=addNumber(this); />" +
+                "<input type='button' class='PINbutton' name='6' value='6' id='6' onClick=addNumber(this); />" +
+                "<br>" +
+                "<input type='button' class='PINbutton' name='7' value='7' id='7' onClick=addNumber(this); />" +
+                "<input type='button' class='PINbutton' name='8' value='8' id='8' onClick=addNumber(this); />" +
+                "<input type='button' class='PINbutton' name='9' value='9' id='9' onClick=addNumber(this); />" +
+                "<br>" +
+                "<input type='button' class='PINbutton clear' name='-' value='clear' id='-' onClick=clearForm(this); />" +
+                "<input type='button' class='PINbutton' name='0' value='0' id='0' onClick=addNumber(this); />" +
+                "<input type='button' class='PINbutton enter' name='+' value='enter' id='+' onClick=submitForm(PINbox); />" +
+            "</form>"
+        );
+        
+        
+        $(document).on('submit','form',function(e){
+            submitForm(PINbox);
+            e.preventDefault();
+            return false;
+        });
+
+        $(function() {
+            $('#PINbox').bind('focusout', function(e) {
+                e.preventDefault();
+                $(this).focus();
+            });
+        });
+
+        var win;
+
+        function addNumber(e){
+            //document.getElementById('PINbox').value = document.getElementById('PINbox').value+element.value;
+            var v = $( "#PINbox" ).val();
+            $( "#PINbox" ).val( v + e.value );
+        }
+        function clearForm(e){
+            //document.getElementById('PINbox').value = "";
+            $( "#PINbox" ).val( "" );
+        }
+        function submitForm(e) {
+            if (e.value == "") {
+                // alert("Enter a PIN");
+            } else {
+                var hpno = e.value;
+                if (hpno.charAt(0) != '6') {
+                    hpno = "6" + hpno;
+                }
+                // alert( hpno );
+                
+                win = window.open("https://api.whatsapp.com/send?phone="+hpno, "_blank");
+                setTimeout(function(){win.close();},10000,win);
+                $( "#PINbox" ).val( "" );
+            }
+            return false;
+        };
+        
+    </script>
+</body>
+</html>
