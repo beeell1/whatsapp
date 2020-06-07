@@ -124,10 +124,17 @@
         });
 
         $(function() {
-            $('#PINbox').bind('focusout', function(e) {
-                e.preventDefault();
-                $(this).focus();
-            });
+            if (/Mobi|Android/i.test(navigator.userAgent)) {
+                // mobile!
+                
+            } else {
+                // not mobile!
+                
+                $('#PINbox').bind('focusout', function(e) {
+                    e.preventDefault();
+                    $(this).focus();
+                });
+            }
         });
 
         var win;
