@@ -146,9 +146,9 @@
                 // alert("Enter a PIN");
             } else {
                 var hpno = e.value;
-                if (hpno.charAt(0) != '6') {
-                    hpno = "6" + hpno;
-                }
+                // if (hpno.charAt(0) != '6') {
+                //     hpno = "6" + hpno;
+                // }
                 // alert( hpno );
                 
                 win = window.open("https://api.whatsapp.com/send?phone="+hpno, "_blank");
